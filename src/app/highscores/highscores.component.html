@@ -1,0 +1,26 @@
+<h2>High scores</h2>
+<!-- 
+    jesli jest cos w historii wyswietlamy to
+    dodatkowo uzywamy pipes by zrobic filtr po akcji i sortowanie (plik pipes.ts)
+-->
+<div *ngIf="data.length > 0">
+<table id="highscores-table">
+    <thead>
+        <tr>
+            <th>Gracz</th>
+            <th>Punkty  <a id="sort-button" href="javascript:void(0);" (click)="toggleOrder()">[ Sortuj ]</a></th>
+        </tr>
+    </thead>
+    <tr *ngFor="let entry of data | sortScores: order">
+        <td>{{entry.name}}</td>
+        <td>{{entry.score}}</td>
+    </tr>
+</table>
+</div>
+<!-- jesli nic nie ma w historii wyswietlamy komunikat -->
+<div *ngIf="data.length == 0">
+    <p><b>Brak danych.</b></p>
+</div>
+<div id="goback">
+    <a id="goback-link" href="/intro" title="Powrót">Powrót</a>
+</div>

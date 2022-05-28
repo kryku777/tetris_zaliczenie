@@ -1,0 +1,29 @@
+<h2>Historia</h2>
+<!-- 
+    jesli jest cos w historii wyswietlamy to
+    dodatkowo uzywamy pipes by zrobic filtr po akcji i sortowanie (plik pipes.ts)
+-->
+<div *ngIf="history.length > 0">
+Filtruj akcje: <input id="term" name="term" [(ngModel)]="term" placeholder="Zacznij pisać...">
+<table id="gameplay-table">
+    <thead>
+        <tr>
+            <th>Akcja</th>
+            <!-- tu jest link do sortowania - kazde klikniecie zmienia kierunek wywolujac funkcje toggleOrder() -->
+            <th>Czas <a id="sort-button" href="javascript:return false;" (click)="toggleOrder()">[ Sortuj ]</a></th>
+            <th>Punkty</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let entry of history | filter : term | sort: order">
+        <td>{{entry.action}}</td>
+        <td>{{entry.timestamp| date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+        <td>{{entry.points}}</td>
+    </tr>
+</table>
+</div>
+<!-- jesli nic nie ma w historii wyswietlamy komunikat -->
+<div *ngIf="history.length == 0">
+    <p><b>Brak danych.</b></p>
+    <br /><br />
+    <h1>Wciśnij ENTER by zacząć</h1>
+</div>
